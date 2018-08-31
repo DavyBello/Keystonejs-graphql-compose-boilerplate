@@ -10,8 +10,6 @@ const { checkEnv } = require('../utils/initApp');
 keystone.init({
   name: 'Keystonejs-graphql-compose-boilerplate',
   's3 config': {},
-  // headless: true,
-  // 'module root': 'C:\\Users\\DAVID\\Documents\\GitHub\\Keystonejs-graphql-compose-boilerplate',
 });
 
 
@@ -46,6 +44,5 @@ before(async () => {
 });
 
 after(async () => {
-  // console.log('stop mongod');
   await mongod.stop();
 })
