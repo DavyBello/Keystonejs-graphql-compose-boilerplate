@@ -30,11 +30,11 @@ module.exports = {
       const existing = await User.findOne({ $OR: [username, email] });
       if (!existing) {
         const newUser = new User({
-          username,
-          email,
-          password,
           firstName,
           lastName,
+          email,
+          password,
+          username,
         });
         await newUser.save();
         return {
