@@ -6,7 +6,7 @@ module.exports = function signToken() {
 
   const token = jwt.sign({
     id: user._id,
-    type: user.__t ? user.__t : 'User',
+    // type: user.__t ? user.__t : 'User',
     pv: keystone.pvCryptr.encrypt(user.passwordVersion),
   }, process.env.JWT_SECRET);
 
