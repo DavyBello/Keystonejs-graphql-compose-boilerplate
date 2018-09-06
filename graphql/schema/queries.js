@@ -13,8 +13,8 @@ const {
 module.exports = {
   posts: PostTC.getResolver('findMany'),
   ...authAccess({ scope: 'User' }, {
-    candidateIsAuthenticated: UserTC.getResolver('isAuthenticated'),
-    Viewer: ViewerTC.getResolver('viewer'),
+    userIsAuthenticated: UserTC.getResolver('isAuthenticated'),
+    viewer: ViewerTC.getResolver('viewer'),
   }),
   currentTime: {
     type: 'Date',
