@@ -2,11 +2,10 @@ const chai = require('chai');
 const { graphql } = require('graphql');
 const keystone = require('keystone');
 
-const Candidate = keystone.list('Candidate').model;
+const User = keystone.list('User').model;
 
 const schema = require('../../../../../graphql/schema');
 
-// const { decodeToken } = require('../../../../modelMethods/user');
 const getContext = require('../../../../../graphql/lib/getContext');
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows,
@@ -15,20 +14,20 @@ const {
 const { expect } = chai;
 
 // language=GraphQL
-const CREATE_CANDIDATE_ACCOUNT_MUTATION = `
+const CREATE_ACCOUNT_MUTATION = `
 mutation M(
   $firstName: String!,
   $lastName: String!,
   $email: String!,
   $password: String!,
-  $phone: String!
+  $username: String!
 ) {
-  candidateCreateAccount(input: {
+  userCreateAccount(input: {
     firstName: $firstName,
     lastName: $lastName,
     email: $email,
     password: $password,
-    phone: $phone
+    username: $username
   }) {
     token
     name
@@ -43,10 +42,10 @@ beforeEach(clearDbAndRestartCounters);
 after(disconnectMongoose);
 
 describe('createAccount Mutation', () => {
-  it('should not create an account with an existing phone', async () => {
-    const user = await createRows.createCandidate();
+  it.skip('should not create an account with an existing username', async () => {
+    const user = await createRows.createUser();
 
-    const query = CREATE_CANDIDATE_ACCOUNT_MUTATION;
+    const query = CREATE_ACCOUNT_MUTATION;
 
     const rootValue = {};
     const context = getContext();
@@ -55,19 +54,19 @@ describe('createAccount Mutation', () => {
       lastName: 'lastName',
       email: 'test@email.com',
       password: 'testpass',
-      phone: user.phone,
+      username: user.username,
     };
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
-    expect(result.data.candidateCreateAccount).to.equal(null);
-    expect(result.errors[0].message).to.equal('phone already exists');
+    expect(result.data.userCreateAccount).to.equal(null);
+    expect(result.errors[0].message).to.equal('username already exists');
   });
 
   it.skip('should not create an account with an existing email', async () => {
-    const user = await createRows.createCandidate();
+    const user = await createRows.createUser();
 
-    const query = CREATE_CANDIDATE_ACCOUNT_MUTATION;
+    const query = CREATE_ACCOUNT_MUTATION;
 
     const rootValue = {};
     const context = getContext();
@@ -76,16 +75,16 @@ describe('createAccount Mutation', () => {
       lastName: 'lastName',
       email: user.email,
       password: 'testpass',
-      phone: '08188555911',
+      username: '08188555911',
     };
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
     // console.log(result);
-    // const candidates = await Candidate.find();
-    // console.log(candidates);
+    // const users = await User.find();
+    // console.log(users);
 
-    expect(result.data.candidateCreateAccount).to.equal(null);
+    expect(result.data.userCreateAccount).to.equal(null);
     expect(result.errors[0].message).to.equal('email already exists');
   });
 
@@ -94,9 +93,9 @@ describe('createAccount Mutation', () => {
     const lastName = 'lastName';
     const email = 'test@email.com';
     const password = 'testpass';
-    const phone = '08188555611';
+    const username = 'testusername';
 
-    const query = CREATE_CANDIDATE_ACCOUNT_MUTATION;
+    const query = CREATE_ACCOUNT_MUTATION;
 
     const rootValue = {};
     const context = getContext();
@@ -105,16 +104,16 @@ describe('createAccount Mutation', () => {
       lastName,
       email,
       password,
-      phone,
+      username,
     };
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
-    expect(result.data.candidateCreateAccount.name).to.exist;
-    expect(result.data.candidateCreateAccount.token).to.exist;
+    expect(result.data.userCreateAccount.name).to.exist;
+    expect(result.data.userCreateAccount.token).to.exist;
     expect(result.errors).to.be.undefined;
 
-    const candidate = await Candidate.findOne({ phone });
-    expect(candidate).to.exist;
+    const user = await User.findOne({ email });
+    expect(user).to.exist;
   });
 });
