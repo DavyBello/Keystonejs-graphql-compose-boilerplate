@@ -5,13 +5,13 @@ module.exports = (options = {}, resolvers) => {
   Object.keys(resolvers).forEach((k) => {
     resolvers[k] = resolvers[k].wrapResolve(next => async (rp) => {
       // const { source, args, context, info } = resolveParams = rp
+      if (!scope) {
+        throw new ForbiddenError('provide an authentication scope for this wrapper');
+      }
       try {
         const { viewer } = rp.context;
         // viewer is a mongoose query
         const viewerUser = await viewer;
-        if (!scope) {
-          throw new ForbiddenError('provide an authentication scope for this wrapper');
-        }
         if (!viewerUser) {
           // Unauthorized request
           if (resolvers[k].parent.name === 'isAuthenticated') {
