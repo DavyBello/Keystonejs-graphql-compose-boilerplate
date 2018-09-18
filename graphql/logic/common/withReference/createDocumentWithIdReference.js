@@ -7,5 +7,5 @@ module.exports = ({ TC, refPath }) => TC.get('$createOne').wrapResolve(next => a
     // run createOne resolver
     return next(rp);
   }
-  return Promise.reject('invalid refPath');
+  return Promise.reject(Error('invalid refPath'));
 });
