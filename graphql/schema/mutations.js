@@ -15,6 +15,7 @@ module.exports = {
 
   // unauthorized user mutations
   loginUser: UserTC.getResolver('loginWithEmail'),
+  authGoogle: UserTC.getResolver('loginWithGoogle'),
   userCreateAccount: UserTC.getResolver('createAccount'),
   userActivateAccount: UserTC.getResolver('activateAccount'),
   userSendPasswordResetLink: UserTC.getResolver('sendPasswordResetLink'),

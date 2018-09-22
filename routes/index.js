@@ -1,5 +1,4 @@
 const cors = require('cors');
-const jwt = require('express-jwt');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');

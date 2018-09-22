@@ -1,5 +1,11 @@
 // Configure CORS -- Remove localhost in final version
-const corsOptions = {};
+// const corsOptions = {};
+const corsOptions = {
+  origin: true,
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  exposedHeaders: ['x-auth-token'],
+};
 // if (process.env.NODE_ENV == 'production') {
 //   const whitelist = [process.env.FRONT_END_URL, 'http://localhost']
 //   corsOptions = {
