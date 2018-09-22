@@ -17,7 +17,7 @@ const { expect } = chai;
 // language=GraphQL
 const VIEWER_QUERY = `
 {
-  Viewer {
+  viewer {
     me {
       _id
       name
@@ -35,7 +35,7 @@ beforeEach(clearDbAndRestartCounters);
 
 after(disconnectMongoose);
 
-describe('Viewer Query', () => {
+describe('viewer Query', () => {
   it('should be null when user is not logged in', async () => {
     await createRows.createUser();
 
@@ -47,7 +47,7 @@ describe('Viewer Query', () => {
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
-    expect(result.data.Viewer).to.equal(null);
+    expect(result.data.viewer).to.equal(null);
     expect(result.errors[0].extensions.code).to.equal('UNAUTHENTICATED');
   });
 
@@ -64,10 +64,10 @@ describe('Viewer Query', () => {
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
-    expect(result.data.Viewer.me._id).to.equal(`${user._id}`);
-    expect(result.data.Viewer.me.name).to.equal(user.name);
-    expect(result.data.Viewer.me.email).to.equal(user.email);
-    // expect(result.data.Viewer.me).to.exist;
+    expect(result.data.viewer.me._id).to.equal(`${user._id}`);
+    expect(result.data.viewer.me.name).to.equal(user.name);
+    expect(result.data.viewer.me.email).to.equal(user.email);
+    // expect(result.data.viewer.me).to.exist;
     expect(result.errors).to.be.undefined;
   });
 });

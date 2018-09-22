@@ -39,6 +39,8 @@
     "lint:fix": "eslint --fix *.js .",
     "dev": "nodemon keystone.js",
     "start": "NODE_ENV=production node keystone.js",
-    "test": "mocha --recursive --timeout 6000 --exit tests/init.js tests/unit"
+    "test": "mocha --recursive --timeout 6000 --exit tests/init.js tests/unit",
+    "test:int": "mocha --recursive --timeout 6000 --exit tests/init.js tests/unit",
+    "test:unit": "mocha --recursive --timeout 6000 --exit tests/init.js ./**/__tests__/*.unit.spec.js"
   }
 }

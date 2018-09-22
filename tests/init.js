@@ -2,8 +2,8 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'test';
 require('dotenv').load();
 
 const keystone = require('keystone');
-// const chai = require('chai');
 const Cryptr = require('cryptr');
+const MongodbMemoryServer = require('mongodb-memory-server');
 
 const { checkEnv } = require('../utils/initApp');
 
@@ -23,9 +23,6 @@ checkEnv([
 
 keystone.pvCryptr = new Cryptr(process.env.PASSWORD_VERSION_SECRET);
 
-// chai.should();
-
-const MongodbMemoryServer = require('mongodb-memory-server');
 
 let mongod;
 before(async () => {

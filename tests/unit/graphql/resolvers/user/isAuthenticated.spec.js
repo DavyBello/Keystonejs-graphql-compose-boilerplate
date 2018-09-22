@@ -26,7 +26,7 @@ after(disconnectMongoose);
 
 describe('userIsAuthenticated Query', () => {
   it('should be false when user is not logged in', async () => {
-    await createRows.createCandidate();
+    await createRows.createUser();
 
     const query = USER_IS_AUTHENTICATED_QUERY;
 
@@ -41,7 +41,7 @@ describe('userIsAuthenticated Query', () => {
   });
 
   it('should be true when user is logged in', async () => {
-    const user = await createRows.createCandidate();
+    const user = await createRows.createUser();
     const token = user.signToken();
     const jwtPayload = decodeToken(token);
 

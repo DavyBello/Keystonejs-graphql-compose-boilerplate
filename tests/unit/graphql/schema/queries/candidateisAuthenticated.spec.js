@@ -24,7 +24,7 @@ beforeEach(clearDbAndRestartCounters);
 
 after(disconnectMongoose);
 
-describe('candidateIsAuthenticated Query', () => {
+describe.skip('candidateIsAuthenticated Query', () => {
   it('should be false when user is not logged in', async () => {
     await createRows.createUser();
 

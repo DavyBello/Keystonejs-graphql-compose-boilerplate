@@ -16,15 +16,13 @@ const { expect } = chai;
 // language=GraphQL
 const CREATE_ACCOUNT_MUTATION = `
 mutation M(
-  $firstName: String!,
-  $lastName: String!,
+  $name: String!,
   $email: String!,
   $password: String!,
   $username: String!
 ) {
   userCreateAccount(input: {
-    firstName: $firstName,
-    lastName: $lastName,
+    name: $name,
     email: $email,
     password: $password,
     username: $username
@@ -50,8 +48,7 @@ describe('createAccount Mutation', () => {
     const rootValue = {};
     const context = getContext();
     const variables = {
-      firstName: 'firstName',
-      lastName: 'lastName',
+      name: 'name',
       email: 'test@email.com',
       password: 'testpass',
       username: user.username,
@@ -71,8 +68,7 @@ describe('createAccount Mutation', () => {
     const rootValue = {};
     const context = getContext();
     const variables = {
-      firstName: 'firstName',
-      lastName: 'lastName',
+      name: 'name',
       email: user.email,
       password: 'testpass',
       username: '08188555911',
@@ -89,8 +85,7 @@ describe('createAccount Mutation', () => {
   });
 
   it('should create a new user when parameters are valid', async () => {
-    const firstName = 'firstName';
-    const lastName = 'lastName';
+    const name = 'name';
     const email = 'test@email.com';
     const password = 'testpass';
     const username = 'testusername';
@@ -100,8 +95,7 @@ describe('createAccount Mutation', () => {
     const rootValue = {};
     const context = getContext();
     const variables = {
-      firstName,
-      lastName,
+      name,
       email,
       password,
       username,
