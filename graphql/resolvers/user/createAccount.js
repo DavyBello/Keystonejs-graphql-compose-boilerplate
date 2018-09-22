@@ -9,8 +9,7 @@ module.exports = {
   description: 'create a newUser account',
   args: {
     input: `input CreateUserAccountInput {
-      firstName: String!
-      lastName: String!
+      name: String!
       email: String!
       password: String!
       username: String!
@@ -23,15 +22,14 @@ module.exports = {
   resolve: async ({ args }) => {
     const {
       input: {
-        firstName, lastName, email, password, username,
+        name, email, password, username,
       },
     } = args;
     try {
-      const existing = await User.findOne({ $OR: [username, email] });
+      const existing = await User.findOne({ $or: [{ username }, { email }] });
       if (!existing) {
         const newUser = new User({
-          firstName,
-          lastName,
+          name,
           email,
           password,
           username,
