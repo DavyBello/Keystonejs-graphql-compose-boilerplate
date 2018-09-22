@@ -3174,15 +3174,6 @@ exposify@~0.5.0:
     through2 "~0.4.0"
     transformify "~0.1.1"
 
-express-jwt@^5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/express-jwt/-/express-jwt-5.3.0.tgz#3d90cd65802e6336252f19e6a3df3e149e0c5ea0"
-  dependencies:
-    async "^1.5.0"
-    express-unless "^0.3.0"
-    jsonwebtoken "^7.3.0"
-    lodash.set "^4.0.0"
-
 express-request-language@^1.1.12:
   version "1.1.15"
   resolved "https://registry.yarnpkg.com/express-request-language/-/express-request-language-1.1.15.tgz#081d1f5c56994daaf9aa7034048101819ace7b4c"
