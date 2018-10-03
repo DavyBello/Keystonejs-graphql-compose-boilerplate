@@ -1,9 +1,9 @@
 const keystone = require('keystone');
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
-const { ExtractJwt, Strategy: JWTStrategy } = require('passport-jwt');
 const { Strategy: GoogleTokenStrategy } = require('passport-google-token');
 
+// User Model (This is a mongoose model)
 const User = keystone.list('User').model;
 
 passport.use(new LocalStrategy({
@@ -28,15 +28,6 @@ passport.use(new LocalStrategy({
     });
   })
   .catch(err => done(err))
-)));
-
-// JWT STRATEGY
-passport.use(new JWTStrategy({
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
-},
-// done(err, user, info);
-((jwtPayload, done) => done(null, jwtPayload || undefined)
 )));
 
 // GOOGLE STRATEGY
