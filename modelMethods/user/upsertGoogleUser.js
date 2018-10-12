@@ -14,14 +14,13 @@ module.exports = function upsertGoogleUser(accessToken, refreshToken, profile, c
         },
       });
 
-      newUser.save((error, savedUser) => {
+      return (newUser.save((error, savedUser) => {
         if (error) {
           console.log(error);
         }
         return cb(error, savedUser);
-      });
-    } else {
-      return cb(err, user);
+      }));
     }
+    return cb(err, user);
   });
 };

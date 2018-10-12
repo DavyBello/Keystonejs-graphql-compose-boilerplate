@@ -1,5 +1,5 @@
 {
-  "name": "Keystonejs-graphql-compose-boilerplate",
+  "name": "keystonejs-graphql-compose-boilerplate",
   "version": "0.0.0",
   "private": true,
   "author": "DavyBello <bellooladipupo41@gmail.com>",
@@ -34,6 +34,7 @@
     "eslint": "^5.3.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.1.1",
     "mocha": "^5.2.0",
     "mongodb-memory-server": "^2.0.1",
     "nodemon": "^1.14.12",
@@ -44,8 +45,9 @@
     "lint:fix": "eslint --fix *.js .",
     "dev": "nodemon keystone.js",
     "start": "NODE_ENV=production node keystone.js",
-    "test": "mocha --recursive --timeout 6000 --exit tests/init.js tests/unit",
-    "test:int": "mocha --recursive --timeout 6000 --exit tests/init.js tests/unit",
-    "test:unit": "mocha --recursive --timeout 6000 --exit tests/init.js ./**/__tests__/*.unit.spec.js"
+    "test": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/unit",
+    "test:int": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/unit",
+    "test:unit": "mocha --recursive --timeout 6000 --exit __tests__/init.js ./**/__tests__/*.unit.spec.js",
+    "precommit": "npm run lint"
   }
 }

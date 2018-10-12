@@ -42,4 +42,4 @@ before(async () => {
 
 after(async () => {
   await mongod.stop();
-})
+});

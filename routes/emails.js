@@ -12,11 +12,11 @@
  */
 
 const keystone = require('keystone');
-
+/* eslint-disable new-cap */
 module.exports = {
 
   /** New Enquiry Notifications */
-  'enquiry-notification': function (req, res, callback) {
+  'enquiry-notification': (req, res, callback) => {
     // To test enquiry notifications we create a dummy enquiry that
     // is not saved to the database, but passed to the template.
 
