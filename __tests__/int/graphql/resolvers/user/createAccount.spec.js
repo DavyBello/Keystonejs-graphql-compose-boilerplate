@@ -6,9 +6,8 @@ const User = keystone.list('User').model;
 
 const schema = require('../../../../../graphql/schema');
 
-const getContext = require('../../../../../graphql/lib/getContext');
 const {
-  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows,
+  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
 } = require('../../../../helper');
 
 const { expect } = chai;

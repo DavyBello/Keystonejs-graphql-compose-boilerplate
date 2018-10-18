@@ -4,9 +4,9 @@ const { graphql } = require('graphql');
 const schema = require('../../../../../graphql/schema');
 
 // const { decodeToken } = require('../../../../modelMethods/user');
-const getContext = require('../../../../../graphql/lib/getContext');
+
 const {
-  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows,
+  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
 } = require('../../../../helper');
 
 const { expect } = chai;
@@ -33,7 +33,7 @@ beforeEach(clearDbAndRestartCounters);
 
 after(disconnectMongoose);
 
-describe.skip('activateAccount Mutation', () => {
+describe.skip('sendUserActivationLink Mutation', () => {
   it('should not login if phone is not in the database', async () => {
     const query = LOGIN_CANDIDATE_MUTATION;
 

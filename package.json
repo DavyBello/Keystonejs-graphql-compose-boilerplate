@@ -4,6 +4,21 @@
   "private": true,
   "author": "DavyBello <bellooladipupo41@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix *.js .",
+    "dev": "nodemon keystone.js",
+    "start": "NODE_ENV=production node keystone.js",
+    "test": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/int",
+    "test:int": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/int",
+    "test:unit": "mocha --recursive --timeout 6000 --exit __tests__/init.js ./**/__tests__/*.unit.spec.js"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm test"
+    }
+  },
   "dependencies": {
     "apollo-server": "^2.1.0",
     "apollo-server-express": "^2.1.0",
@@ -39,15 +54,5 @@
     "mongodb-memory-server": "^2.0.1",
     "nodemon": "^1.14.12",
     "prettier-eslint": "^8.8.2"
-  },
-  "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix *.js .",
-    "dev": "nodemon keystone.js",
-    "start": "NODE_ENV=production node keystone.js",
-    "test": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/unit",
-    "test:int": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/unit",
-    "test:unit": "mocha --recursive --timeout 6000 --exit __tests__/init.js ./**/__tests__/*.unit.spec.js",
-    "precommit": "npm run lint"
   }
 }

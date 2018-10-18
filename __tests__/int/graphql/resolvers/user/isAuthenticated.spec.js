@@ -4,17 +4,17 @@ const { graphql } = require('graphql');
 const schema = require('../../../../../graphql/schema');
 
 const { decodeToken } = require('../../../../../modelMethods/user');
-const getContext = require('../../../../../graphql/lib/getContext');
+
 const {
-  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows,
+  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
 } = require('../../../../helper');
 
 const { expect } = chai;
 
 // language=GraphQL
-const CANDIDATE_IS_AUTHENTICATED_QUERY = `
+const USER_IS_AUTHENTICATED_QUERY = `
 {
-  candidateIsAuthenticated
+  userIsAuthenticated
 }
 `;
 
@@ -24,11 +24,11 @@ beforeEach(clearDbAndRestartCounters);
 
 after(disconnectMongoose);
 
-describe.skip('candidateIsAuthenticated Query', () => {
+describe('userIsAuthenticated Query', () => {
   it('should be false when user is not logged in', async () => {
     await createRows.createUser();
 
-    const query = CANDIDATE_IS_AUTHENTICATED_QUERY;
+    const query = USER_IS_AUTHENTICATED_QUERY;
 
     const rootValue = {};
     const context = getContext();
@@ -36,7 +36,7 @@ describe.skip('candidateIsAuthenticated Query', () => {
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
-    expect(result.data.candidateIsAuthenticated).to.equal(false);
+    expect(result.data.userIsAuthenticated).to.equal(false);
     expect(result.errors).to.be.undefined;
   });
 
@@ -45,7 +45,7 @@ describe.skip('candidateIsAuthenticated Query', () => {
     const token = user.signToken();
     const jwtPayload = decodeToken(token);
 
-    const query = CANDIDATE_IS_AUTHENTICATED_QUERY;
+    const query = USER_IS_AUTHENTICATED_QUERY;
 
     const rootValue = {};
     const context = getContext({ jwtPayload });
@@ -53,7 +53,7 @@ describe.skip('candidateIsAuthenticated Query', () => {
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
-    expect(result.data.candidateIsAuthenticated).to.equal(true);
+    expect(result.data.userIsAuthenticated).to.equal(true);
     expect(result.errors).to.be.undefined;
   });
 });
