@@ -5,6 +5,7 @@ const eJwt = require('express-jwt');
 const schema = require('../graphql/schema');
 const getContext = require('../graphql/lib/getContext');
 // const corsOptions = require('../config/corsOptions');
+const services = require('../lib/services');
 
 require('./passport');
 
@@ -26,6 +27,7 @@ module.exports = (app) => {
     schema,
     context: ({ req, res }) => ({
       ...getContext({ jwtPayload: req.user }),
+      services,
       req,
       res,
     }),
