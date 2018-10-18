@@ -9,6 +9,6 @@ UserTC.addResolver(require('./loginWithGoogle'));
 UserTC.addResolver(require('./createAccount'));
 UserTC.addResolver(require('./activateAccount'));
 UserTC.addResolver(require('./resetPassword'));
-UserTC.addResolver(require('./handlePasswordResetLinkEmail'));
-UserTC.addResolver(require('./handleActivationLinkEmail'));
+UserTC.addResolver(require('./sendActivationLinkEmail'));
+UserTC.addResolver(require('./sendPasswordResetLinkEmail'));
 UserTC.addResolver(require('./changePassword'));

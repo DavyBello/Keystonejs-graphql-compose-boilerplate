@@ -23,7 +23,7 @@ module.exports = {
 
   // Authorized user mutations
   ...authAccess({ scope: 'User' }, {
-    userResendActivationLink: UserTC.getResolver('handleActivationLinkEmail'),
+    userResendActivationLink: UserTC.getResolver('sendActivationLinkEmail'),
     userChangePassword: UserTC.getResolver('changePassword'),
     userUpdateSelf: updateSelf({ TC: UserTC }),
     userCreatePost: PlaceHolderTC.getResolver('underDevelopment'),

@@ -7,12 +7,12 @@ const User = keystone.list('User').model;
 const routes = {
   '/user-activation': async (req, res) => {
     const user = await User.findOne();
-    const html = await user.handleActivationLinkEmail('render');
+    const { html } = await user.getActivationLinkEmail().render();
     res.send(html);
   },
   '/user-reset-password': async (req, res) => {
     const user = await User.findOne();
-    const html = await user.handlePasswordResetLinkEmail('render');
+    const { html } = await user.getPasswordResetLinkEmail().render();
     res.send(html);
   },
 };

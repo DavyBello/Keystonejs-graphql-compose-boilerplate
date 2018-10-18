@@ -4,7 +4,7 @@ const User = keystone.list('User').model;
 
 module.exports = {
   kind: 'mutation',
-  name: 'handlePasswordResetLinkEmail',
+  name: 'sendPasswordResetLinkEmail',
   description: 'Send password reset link to user email',
   args: {
     input: `input ResetPasswordLinkInput {
@@ -19,9 +19,9 @@ module.exports = {
     const { input: { email } } = args;
     const user = await User.findOne({ email });
     if (user) {
-      if (user.handlePasswordResetLinkEmail) {
+      if (user.getPasswordResetLinkEmail) {
         try {
-          await user.handlePasswordResetLinkEmail();
+          await user.getPasswordResetLinkEmail().send();
           return ({
             status: 'success',
             email: user.email,

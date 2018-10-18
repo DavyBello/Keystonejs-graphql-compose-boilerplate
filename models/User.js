@@ -41,11 +41,11 @@ User.schema.pre('save', (next) => {
 
 // Methods
 const {
-  handleActivationLinkEmail, handlePasswordResetLinkEmail, signToken, upsertGoogleUser,
+  getActivationLinkEmail, getPasswordResetLinkEmail, signToken, upsertGoogleUser,
 } = ModelMethods;
 
-User.schema.methods.handleActivationLinkEmail = handleActivationLinkEmail;
-User.schema.methods.handlePasswordResetLinkEmail = handlePasswordResetLinkEmail;
+User.schema.methods.getActivationLinkEmail = getActivationLinkEmail;
+User.schema.methods.getPasswordResetLinkEmail = getPasswordResetLinkEmail;
 User.schema.methods.signToken = signToken;
 
 // Static Methods

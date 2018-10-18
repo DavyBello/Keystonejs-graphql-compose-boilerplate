@@ -1,15 +1,15 @@
 module.exports = {
   kind: 'mutation',
-  name: 'handleActivationLinkEmail',
+  name: 'sendActivationLinkEmail',
   description: 'Send account activation link to user email',
   type: `type SendActivationLinkPayload {
 		status: String!
 		email: String!
 	}`,
   resolve: async ({ context: { viewer } }) => {
-    if (viewer.handleActivationLinkEmail) {
+    if (viewer.getActivationLinkEmail) {
       try {
-        await viewer.handleActivationLinkEmail();
+        await viewer.getActivationLinkEmail().send();
         return ({
           status: 'success',
           email: viewer.email,
