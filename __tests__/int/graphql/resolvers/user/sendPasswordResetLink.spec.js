@@ -33,7 +33,7 @@ beforeEach(clearDbAndRestartCounters);
 
 after(disconnectMongoose);
 
-describe.skip('sendPasswordResetLink Mutation', () => {
+describe.skip('handlePasswordResetLinkEmail Mutation', () => {
   it('should not login if phone is not in the database', async () => {
     const query = LOGIN_CANDIDATE_MUTATION;
 
