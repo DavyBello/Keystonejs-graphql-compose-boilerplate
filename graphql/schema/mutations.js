@@ -18,7 +18,7 @@ module.exports = {
   authGoogle: UserTC.getResolver('loginWithGoogle'),
   userCreateAccount: UserTC.getResolver('createAccount'),
   userActivateAccount: UserTC.getResolver('activateAccount'),
-  userSendPasswordResetLink: UserTC.getResolver('handlePasswordResetLinkEmail'),
+  userSendPasswordResetLink: UserTC.getResolver('sendPasswordResetLinkEmail'),
   userResetPassword: UserTC.getResolver('resetPassword'),
 
   // Authorized user mutations
