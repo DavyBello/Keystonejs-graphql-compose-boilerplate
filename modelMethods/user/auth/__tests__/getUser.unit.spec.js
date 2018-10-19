@@ -1,10 +1,9 @@
 // const mongoose = require('mongoose');
 const chai = require('chai');
 
-const { decodeToken } = require('../');
-const getContext = require('../../../graphql/lib/getContext');
+const decodeToken = require('../decodeToken');
 const {
-  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows,
+  connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
 } = require('../../../tests/helper');
 
 const { expect } = chai;

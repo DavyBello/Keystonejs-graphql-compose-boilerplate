@@ -7,6 +7,8 @@ const getContext = require('../graphql/lib/getContext');
 // const corsOptions = require('../config/corsOptions');
 const services = require('../lib/services');
 
+const emailRoutes = require('./emails');
+
 require('./passport');
 
 const apiPath = '/graphql';
@@ -37,4 +39,9 @@ module.exports = (app) => {
     app,
     path: apiPath,
   });
+
+  if (process.env.NODE_ENV !== 'production') {
+    // route for rendering emails without sending them
+    app.use('/test-emails', emailRoutes);
+  }
 };

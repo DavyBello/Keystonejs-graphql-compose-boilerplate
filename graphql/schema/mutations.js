@@ -18,12 +18,12 @@ module.exports = {
   authGoogle: UserTC.getResolver('loginWithGoogle'),
   userCreateAccount: UserTC.getResolver('createAccount'),
   userActivateAccount: UserTC.getResolver('activateAccount'),
-  userSendPasswordResetLink: UserTC.getResolver('sendPasswordResetLink'),
+  userSendPasswordResetLink: UserTC.getResolver('sendPasswordResetLinkEmail'),
   userResetPassword: UserTC.getResolver('resetPassword'),
 
   // Authorized user mutations
   ...authAccess({ scope: 'User' }, {
-    userResendActivationLink: UserTC.getResolver('sendUserActivationLink'),
+    userResendActivationLink: UserTC.getResolver('sendActivationLinkEmail'),
     userChangePassword: UserTC.getResolver('changePassword'),
     userUpdateSelf: updateSelf({ TC: UserTC }),
     userCreatePost: PlaceHolderTC.getResolver('underDevelopment'),
