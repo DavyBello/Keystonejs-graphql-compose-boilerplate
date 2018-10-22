@@ -78,5 +78,14 @@ mailgunUtils.checkMailgun();
 
 keystone.pvCryptr = new Cryptr(process.env.PASSWORD_VERSION_SECRET);
 
+const apolloServer = require('./apolloServer');
+
 // Start Keystone to connect to your database and initialise the web server
-keystone.start();
+keystone.start({
+  onStart: () => {
+    const server = keystone.httpsServer
+      ? keystone.httpsServer : keystone.httpServer;
+
+    apolloServer.installSubscriptionHandlers(server);
+  },
+});

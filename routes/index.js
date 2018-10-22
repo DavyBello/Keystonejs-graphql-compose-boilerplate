@@ -1,11 +1,6 @@
-const cors = require('cors');
-const { ApolloServer } = require('apollo-server-express');
 const eJwt = require('express-jwt');
 
-const schema = require('../graphql/schema');
-const getContext = require('../graphql/lib/getContext');
-// const corsOptions = require('../config/corsOptions');
-const services = require('../lib/services');
+const apolloServer = require('../apolloServer');
 
 const emailRoutes = require('./emails');
 
@@ -24,21 +19,7 @@ module.exports = (app) => {
     eJwt({ secret: process.env.JWT_SECRET, credentialsRequired: false }),
   );
 
-  const server = new ApolloServer({
-    cors,
-    schema,
-    context: ({ req, res }) => ({
-      ...getContext({ jwtPayload: req.user }),
-      services,
-      req,
-      res,
-    }),
-  });
-
-  server.applyMiddleware({
-    app,
-    path: apiPath,
-  });
+  apolloServer.applyMiddleware({ app, path: apiPath });
 
   if (process.env.NODE_ENV !== 'production') {
     // route for rendering emails without sending them

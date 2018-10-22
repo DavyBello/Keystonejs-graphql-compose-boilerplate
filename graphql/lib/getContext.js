@@ -1,17 +1,17 @@
 const keystone = require('keystone');
 
 const User = keystone.list('User').model;
-const Post = keystone.list('Post').model;
-const PostCategory = keystone.list('PostCategory').model;
+// const Post = keystone.list('Post').model;
+// const PostCategory = keystone.list('PostCategory').model;
 
 
 module.exports = ({ jwtPayload = {} } = {}) => {
   let context = {
-    models: {
-      User,
-      Post,
-      PostCategory,
-    },
+    // models: {
+    //   User,
+    //   Post,
+    //   PostCategory,
+    // },
   };
   if (jwtPayload) {
     const queryParams = {
