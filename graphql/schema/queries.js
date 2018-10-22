@@ -1,7 +1,7 @@
 // Get logic middleware
 const {
   authAccess,
-} = require('../logic/authentication');
+} = require('../utils/authentication');
 
 const {
   UserTC,

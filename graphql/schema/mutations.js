@@ -1,10 +1,10 @@
 // Get logic middleware
 const {
   authAccess,
-} = require('../logic/authentication');
+} = require('../utils/authentication');
 const {
   updateSelf,
-} = require('../logic/common');
+} = require('../utils/common');
 const {
   addPost,
 } = require('../resolvers/mutations');
