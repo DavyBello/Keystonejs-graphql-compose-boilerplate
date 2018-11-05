@@ -6,7 +6,7 @@ const User = keystone.list('User').model;
 
 module.exports = {
   kind: 'mutation',
-  name: 'activateAccount',
+  name: 'verifyAccount',
   description: 'Activate a User account',
   args: { code: 'String!' },
   type: `type ActivateUserAccountPayload {

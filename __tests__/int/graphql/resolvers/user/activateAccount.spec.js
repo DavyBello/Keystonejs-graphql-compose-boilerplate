@@ -33,7 +33,7 @@ beforeEach(clearDbAndRestartCounters);
 
 after(disconnectMongoose);
 
-describe.skip('activateAccount Mutation', () => {
+describe.skip('verifyAccount Mutation', () => {
   it('should not login if phone is not in the database', async () => {
     const query = LOGIN_CANDIDATE_MUTATION;
 
