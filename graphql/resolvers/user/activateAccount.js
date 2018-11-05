@@ -17,7 +17,7 @@ module.exports = {
   resolve: async ({ args }) => {
     const { code } = args;
     try {
-      const data = jwt.verify(code, process.env.ACTIVATION_JWT_SECRET);
+      const data = jwt.verify(code, process.env.CODEGEN_JWT_SECRET);
       const { id, createdAt } = data;
       if (id) {
         if (createdAt && moment(createdAt).isAfter(moment().subtract(24, 'hours'))) {
