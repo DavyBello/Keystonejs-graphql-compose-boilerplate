@@ -22,10 +22,10 @@ module.exports = {
       if (id) {
         if (createdAt && moment(createdAt).isAfter(moment().subtract(24, 'hours'))) {
           const user = await User.findOne({ _id: id });
-          if (user.isActivated) {
+          if (user.isVerified) {
             return Promise.reject(new Error('activated account'));
           }
-          user.isActivated = true;
+          user.isVerified = true;
           await user.save();
           const token = user.signToken();
           return {

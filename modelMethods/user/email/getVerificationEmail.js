@@ -6,7 +6,7 @@ const createAccountVerificationCode = require('../../../lib/createAccountVerific
 module.exports = function getVerificationEmail() {
   const user = this;
 
-  if (user.isActivated) return (Error('Account is already activated'));
+  if (user.isVerified) return (Error('Account is already verified'));
 
   const brandDetails = keystone.get('brandDetails');
 
