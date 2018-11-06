@@ -4,18 +4,24 @@ const moment = require('moment');
 
 const User = keystone.list('User').model;
 
+const { UserInputError } = require('apollo-server');
+
 module.exports = {
   kind: 'mutation',
   name: 'verifyAccount',
   description: 'Activate a User account',
-  args: { code: 'String!' },
+  args: {
+    input: `input ActivateUserAccountInput {
+      code: String!
+		}`,
+  },
   type: `type ActivateUserAccountPayload {
     token: String!
-    userType: String!
+    userType: String
     name: String!
   }`,
   resolve: async ({ args }) => {
-    const { code } = args;
+    const { input: { code } } = args;
     try {
       const data = jwt.verify(code, process.env.CODEGEN_JWT_SECRET);
       const { id, createdAt } = data;
@@ -23,7 +29,7 @@ module.exports = {
         if (createdAt && moment(createdAt).isAfter(moment().subtract(24, 'hours'))) {
           const user = await User.findOne({ _id: id });
           if (user.isVerified) {
-            return Promise.reject(new Error('activated account'));
+            return Promise.reject(new UserInputError('verified account'));
           }
           user.isVerified = true;
           await user.save();
@@ -33,11 +39,11 @@ module.exports = {
             token,
           };
         }
-        return Promise.reject(new Error('expired token'));
+        return Promise.reject(new UserInputError('expired token'));
       }
-      return Promise.reject(new Error('invalid token'));
-    } catch (e) {
-      throw e;
+      return Promise.reject(new UserInputError('invalid token'));
+    } catch (err) {
+      throw new UserInputError(err);
     }
   },
 };
