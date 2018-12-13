@@ -37,3 +37,4 @@ module.exports = new ApolloServer({
     // },
   },
 });
+// require('./graphql/relationships');

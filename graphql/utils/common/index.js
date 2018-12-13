@@ -20,7 +20,7 @@ exports.updateSelf = require('./updateSelf');
 //
 // // Create and add id of relationship document (Cloudinary file) to the viewer/Self
 // exports.deleteManagedRelationship = require('./deleteManagedRelationship');
-//
+
 // exports.createModelRelationship = require('./createModelRelationship');
 
 // Create and add id of relationship document to the viewer/Self
