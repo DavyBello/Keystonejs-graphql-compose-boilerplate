@@ -5,13 +5,13 @@
   "author": "DavyBello <bellooladipupo41@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix *.js .",
-    "dev": "nodemon keystone.js",
-    "start": "NODE_ENV=production node keystone.js",
-    "test": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/int",
-    "test:int": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/int",
-    "test:unit": "mocha --recursive --timeout 6000 --exit __tests__/init.js ./**/__tests__/*.unit.spec.js"
+    "lint": "eslint src",
+    "lint:fix": "eslint --fix src",
+    "dev": "nodemon src/keystone.js",
+    "start": "NODE_ENV=production node src/keystone.js",
+    "test": "npm run test:int",
+    "test:int": "mocha --recursive --timeout 6000 --exit src/__tests__/init.js src/__tests__/int",
+    "test:unit": "mocha --recursive --timeout 6000 --exit src/__tests__/init.js src/**/__tests__/*.unit.spec.js"
   },
   "husky": {
     "hooks": {
