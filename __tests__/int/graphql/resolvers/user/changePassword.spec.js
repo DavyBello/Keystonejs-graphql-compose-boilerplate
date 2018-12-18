@@ -4,7 +4,7 @@ const { graphql } = require('graphql');
 
 const User = keystone.list('User').model;
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const { decodeToken } = require('../../../../../modelMethods/user');
 

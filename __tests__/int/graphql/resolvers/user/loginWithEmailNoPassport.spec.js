@@ -2,7 +2,7 @@ const chai = require('chai');
 const { graphql } = require('graphql');
 const { createRequest, createResponse } = require('node-mocks-http');
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext

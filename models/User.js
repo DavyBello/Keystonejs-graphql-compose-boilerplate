@@ -1,14 +1,13 @@
 /* eslint-disable func-names */
-const keystone = require('keystone');
+const { Field: { Types }, List } = require('keystone');
 
-const { Types } = keystone.Field;
 const ModelMethods = require('../modelMethods/user/index.js');
 
 /**
  * User Model
  * ==========
  */
-const User = new keystone.List('User');
+const User = new List('User');
 
 // TODO: minimum password age, password complexity validation
 User.add({

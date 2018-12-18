@@ -4,7 +4,7 @@ const keystone = require('keystone');
 
 const User = keystone.list('User').model;
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext

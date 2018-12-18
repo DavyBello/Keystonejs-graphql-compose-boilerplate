@@ -1,8 +1,8 @@
 const cors = require('cors');
 const { ApolloServer } = require('apollo-server-express');
 
-const schema = require('./graphql/schema');
-const getContext = require('./graphql/lib/getContext');
+const schema = require('./graphQL/schema');
+const getContext = require('./graphQL/lib/getContext');
 // const corsOptions = require('../config/corsOptions');
 const services = require('./lib/services');
 
@@ -37,4 +37,3 @@ module.exports = new ApolloServer({
     // },
   },
 });
-// require('./graphql/relationships');

@@ -1,7 +1,7 @@
 const chai = require('chai');
 const { graphql } = require('graphql');
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const { decodeToken } = require('../../../../../modelMethods/user');
 
@@ -18,7 +18,7 @@ const GET_POSTS_QUERY = `
     _id
     title
     state
-    author
+    authorId
     publishedDate
     slug
     content {

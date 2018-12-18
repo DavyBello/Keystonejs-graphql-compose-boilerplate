@@ -1,7 +1,7 @@
 const chai = require('chai');
 const { graphql } = require('graphql');
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const { decodeToken } = require('../../../../../modelMethods/user');
 

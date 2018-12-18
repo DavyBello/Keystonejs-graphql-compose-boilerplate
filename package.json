@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "lint:fix": "eslint --fix *.js .",
+    "lint:fix": "eslint --fix *.js",
     "dev": "nodemon keystone.js",
     "start": "NODE_ENV=production node keystone.js",
     "test": "mocha --recursive --timeout 6000 --exit __tests__/init.js __tests__/int",

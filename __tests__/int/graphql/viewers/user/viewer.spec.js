@@ -4,7 +4,7 @@ const keystone = require('keystone');
 
 // const Candidate = keystone.list('Candidate').model;
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const { decodeToken } = require('../../../../../modelMethods/user');
 const {

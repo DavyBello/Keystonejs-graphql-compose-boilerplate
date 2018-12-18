@@ -1,7 +1,7 @@
 const chai = require('chai');
 const { graphql } = require('graphql');
 
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
@@ -47,12 +47,12 @@ describe('PostCategory relationship query', () => {
 
     const result = await graphql(schema, query, rootValue, context, variables);
 
+    expect(result.errors).to.be.undefined;
     const { categories } = result.data.posts[0];
 
     expect(categories.length).to.equal(2);
     expect(categories[0]._id).to.equal(`${postCategory._id}`);
     expect(categories[1]._id).to.equal(`${postCategory1._id}`);
-    expect(result.errors).to.be.undefined;
   });
 
   it("should return an empty array when there's no category in the post", async () => {

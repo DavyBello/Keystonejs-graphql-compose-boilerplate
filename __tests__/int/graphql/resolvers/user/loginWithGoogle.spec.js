@@ -6,7 +6,7 @@ const { createRequest, createResponse } = require('node-mocks-http');
 const User = keystone.list('User').model;
 
 const mockedGoogleProfile = require('../../../../mocks/passport/profile/mockGoogleProfile')
-const schema = require('../../../../../graphql/schema');
+const schema = require('../../../../../graphQL/schema');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext

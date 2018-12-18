@@ -15,7 +15,7 @@ keystone.init({
 
 
 keystone.import('../models');
-
+require('../app/components');
 keystone.set('routes', require('../routes'));
 
 checkEnv([
