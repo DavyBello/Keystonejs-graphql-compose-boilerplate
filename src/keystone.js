@@ -30,9 +30,6 @@ keystone.init({
   'user model': 'keystoneAdmin',
 });
 
-// Load your project's Models
-keystone.import('models');
-
 // Load your project's Components
 require('./app/components');
 
@@ -48,13 +45,13 @@ keystone.set('locals', {
 });
 
 // Load your project's Routes
-keystone.set('routes', require('./routes'));
+// keystone.set('routes', require('./routes'));
 
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-  posts: ['Post', 'PostCategory'],
-  users: 'User',
+  // posts: ['Post', 'PostCategory'],
+  // users: 'User',
   admins: 'keystoneAdmin',
 });
 
@@ -81,14 +78,14 @@ mailgunUtils.checkMailgun();
 
 keystone.pvCryptr = new Cryptr(process.env.PASSWORD_VERSION_SECRET);
 
-const apolloServer = require('./apolloServer');
+// const apolloServer = require('./apolloServer');
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({
-  onStart: () => {
-    const server = keystone.httpsServer
-      ? keystone.httpsServer : keystone.httpServer;
+  // onStart: () => {
+  //   const server = keystone.httpsServer
+  //     ? keystone.httpsServer : keystone.httpServer;
 
-    apolloServer.installSubscriptionHandlers(server);
-  },
+  //   apolloServer.installSubscriptionHandlers(server);
+  // },
 });

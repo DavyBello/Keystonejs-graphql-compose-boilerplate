@@ -8,13 +8,11 @@ const MongodbMemoryServer = require('mongodb-memory-server');
 const { checkEnv } = require('../utils/initApp');
 
 keystone.init({
-  name: 'compas-world-backend',
+  name: 'Keystonejs-graphql-compose-boilerplate',
   's3 config': {},
   headless: true,
 });
 
-
-keystone.import('../models');
 require('../app/components');
 keystone.set('routes', require('../routes'));
 

@@ -1,4 +1,6 @@
+require('require-all')(`${__dirname}/models`);
 const app = require('../../app');
+
 const typeComposers = require('./graphQL/typeComposers');
 
 // Add resolvers to Type Composers
@@ -14,4 +16,11 @@ app.registerComponent({
     mutations,
     queries,
   },
+  admin: {
+    nav: { users: 'User' }
+  },
+  services: {
+    sendVerificationEmail: user => user.getVerificationEmail().send(),
+    sendPasswordResetLinkEmail: user => user.getPasswordResetLinkEmail().send(),
+  }
 });

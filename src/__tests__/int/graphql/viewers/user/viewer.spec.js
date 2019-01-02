@@ -6,7 +6,7 @@ const keystone = require('keystone');
 
 const schema = require('../../../../../graphQL/schema');
 
-const { decodeToken } = require('../../../../../modelMethods/user');
+const { decodeToken } = require('../../../../../components/User/methods');
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
 } = require('../../../../helper');

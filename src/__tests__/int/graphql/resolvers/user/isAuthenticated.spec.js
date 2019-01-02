@@ -3,7 +3,7 @@ const { graphql } = require('graphql');
 
 const schema = require('../../../../../graphQL/schema');
 
-const { decodeToken } = require('../../../../../modelMethods/user');
+const { decodeToken } = require('../../../../../components/User/methods');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext

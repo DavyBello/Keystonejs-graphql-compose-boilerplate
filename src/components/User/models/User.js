@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 const { Field: { Types }, List } = require('keystone');
 
-const ModelMethods = require('../modelMethods/user/index.js');
+const ModelMethods = require('../methods/index.js');
 
 /**
  * User Model

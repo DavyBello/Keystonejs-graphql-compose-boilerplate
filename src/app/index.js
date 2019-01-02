@@ -1,4 +1,5 @@
 const { merge } = require('lodash');
+const caller = require('caller');
 const {
   queries,
   mutations,
@@ -6,46 +7,57 @@ const {
   typeComposers,
   _relationships,
 } = require('../graphQL');
+const coreServices = require('../lib/services');
 
 module.exports = {
   Components: {},
 
   registerComponent(packageInfo) {
     // Mutate globals with package info
-    if (packageInfo.graphQL) {
-      if (packageInfo.graphQL.queries) {
-        merge(queries, packageInfo.graphQL.queries);
+    packageInfo.dirname = caller();
+    // console.log(packageInfo);
+    const { name, graphQL, services } = packageInfo;
+    if (graphQL) {
+      if (graphQL.queries) {
+        merge(queries, graphQL.queries);
       }
-      if (packageInfo.graphQL.mutations) {
-        merge(mutations, packageInfo.graphQL.mutations);
+      if (graphQL.mutations) {
+        merge(mutations, graphQL.mutations);
       }
-      if (packageInfo.graphQL.subscriptions) {
-        merge(subscriptions, packageInfo.graphQL.subscriptions);
+      if (graphQL.subscriptions) {
+        merge(subscriptions, graphQL.subscriptions);
       }
-      if (packageInfo.graphQL.typeComposers) {
-        merge(typeComposers, packageInfo.graphQL.typeComposers);
+      if (graphQL.typeComposers) {
+        merge(typeComposers, graphQL.typeComposers);
       }
-      if (packageInfo.graphQL.addRelationships) {
-        if (packageInfo.graphQL.addRelationships instanceof Function) {
-          _relationships.push(packageInfo.graphQL.addRelationships);
+      if (graphQL.addRelationships) {
+        if (graphQL.addRelationships instanceof Function) {
+          _relationships.push(graphQL.addRelationships);
         } else {
           throw new Error('expected addRelatinship to be a function');
         }
       }
     }
 
-    // if (packageInfo.functionsByType) {
-    //     Object.keys(packageInfo.functionsByType).forEach((type) => {
+    if (services) {
+      merge(coreServices, services);
+    }
+
+    // if (functionsByType) {
+    //     Object.keys(functionsByType).forEach((type) => {
     //         if (!Array.isArray(functionsByType[type])) {
     //             functionsByType[type] = [];
     //         }
-    //         functionsByType[type].push(...packageInfo.functionsByType[type]);
+    //         functionsByType[type].push(...functionsByType[type]);
     //     });
     // }
 
     // Save the package info
-    this.Components[packageInfo.name] = packageInfo;
-    const registeredComponent = this.Components[packageInfo.name];
-    return registeredComponent;
+    if (!this.Components[name]) {
+      this.Components[name] = packageInfo;
+      const registeredComponent = this.Components[name];
+      return registeredComponent;
+    }
+    throw new Error(`A Component named ${name} has already been registered`);
   },
 };

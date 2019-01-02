@@ -1,7 +1,7 @@
 const keystone = require('keystone');
 
-const prepareEmail = require('../../../lib/prepareEmail');
-const createAccountVerificationCode = require('../../../lib/createAccountVerificationCode');
+const prepareEmail = require('../../../../lib/prepareEmail');
+const createAccountVerificationCode = require('../../lib/createAccountVerificationCode');
 
 module.exports = function getVerificationEmail() {
   const user = this;

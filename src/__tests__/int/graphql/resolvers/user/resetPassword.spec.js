@@ -6,7 +6,7 @@ const User = keystone.list('User').model;
 
 const schema = require('../../../../../graphQL/schema');
 
-const createPasswordResetCode = require('../../../../../lib/createPasswordResetCode');
+const createPasswordResetCode = require('../../../../../components/User/lib/createPasswordResetCode');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext

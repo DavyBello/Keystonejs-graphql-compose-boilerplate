@@ -6,7 +6,7 @@ const User = keystone.list('User').model;
 
 const schema = require('../../../../../graphQL/schema');
 
-const createAccountVerificationCode = require('../../../../../lib/createAccountVerificationCode');
+const createAccountVerificationCode = require('../../../../../components/User/lib/createAccountVerificationCode');
 
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
