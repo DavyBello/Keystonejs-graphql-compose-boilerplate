@@ -17,10 +17,10 @@ app.registerComponent({
     queries,
   },
   admin: {
-    nav: { users: 'User' }
+    nav: { users: 'User' },
   },
   services: {
     sendVerificationEmail: user => user.getVerificationEmail().send(),
     sendPasswordResetLinkEmail: user => user.getPasswordResetLinkEmail().send(),
-  }
+  },
 });

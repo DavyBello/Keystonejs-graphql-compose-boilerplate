@@ -4,6 +4,6 @@ const app = require('../../app');
 app.registerComponent({
   name: 'Admin',
   admin: {
-    nav: { admins: 'keystoneAdmin' }
+    nav: { admins: 'keystoneAdmin' },
   },
 });

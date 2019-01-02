@@ -20,6 +20,6 @@ app.registerComponent({
     },
   },
   admin: {
-    nav: { posts: ['Post', 'PostCategory'] }
+    nav: { posts: ['Post', 'PostCategory'] },
   },
 });
