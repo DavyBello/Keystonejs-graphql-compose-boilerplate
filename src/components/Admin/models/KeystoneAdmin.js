@@ -1,13 +1,11 @@
 /* eslint-disable func-names */
-const keystone = require('keystone');
-
-const { Types } = keystone.Field;
+const { List, Field: { Types } } = require('keystone');
 
 /**
  * keystoneAdmin Model
  * ==========
  */
-const keystoneAdmin = new keystone.List('keystoneAdmin', {
+const keystoneAdmin = new List('keystoneAdmin', {
   track: true,
 });
 
@@ -26,12 +24,6 @@ keystoneAdmin.add({
 keystoneAdmin.schema.virtual('canAccessKeystone').get(function () {
   return this.isAdmin;
 });
-
-/**
- * Relationships
- */
-// keystoneAdmin.relationship({ ref: 'Payment', path: 'payments', refPath: 'madeBy' });
-
 
 /**
  * Registration
