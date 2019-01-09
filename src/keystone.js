@@ -5,6 +5,7 @@ require('dotenv').config();
 
 // Require keystone
 const keystone = require('keystone');
+const handlebars = require('express-handlebars');
 const Cryptr = require('cryptr');
 
 const { checkEnv } = require('./utils/initApp');
@@ -21,7 +22,12 @@ keystone.init({
   static: 'public',
   favicon: 'public/favicon.ico',
   // views: 'templates/views',
-  'view engine': 'pug',
+  'view engine': '.hbs',
+
+  'custom engine': handlebars.create({
+    helpers: require('../templates/helpers')(),
+    extname: '.hbs',
+  }).engine,
 
   emails: 'templates/emails',
 
