@@ -5,11 +5,10 @@ const { Strategy: LocalStrategy } = require('passport-local');
 // User Model (This is a mongoose model)
 const User = keystone.list('User').model;
 
-passport.use(new LocalStrategy({
+const Strategy = new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-},
-((email, password, done) => User.findOne({ email })
+}, ((email, password, done) => User.findOne({ email })
   .then((user) => {
     // done(err, user, info);
     if (!user) {
@@ -27,10 +26,18 @@ passport.use(new LocalStrategy({
     });
   })
   .catch(err => done(err))
-)));
+));
 
-/* eslint-disable global-require */
-if (process.env.GOOGLE_CLIENTID) {
-  const GoogleTokenStrategy = require('./GoogleTokenStrategy');
-  passport.use(GoogleTokenStrategy);
-}
+passport.use(Strategy);
+
+const authenticate = (req, res) => new Promise((resolve, reject) => {
+  passport.authenticate('local', { session: false }, (err, user, info) => {
+    if (err) reject(err);
+    resolve({ user, info });
+  })(req, res);
+});
+
+module.exports = {
+  Strategy,
+  authenticate,
+};

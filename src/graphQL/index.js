@@ -12,10 +12,4 @@ module.exports = {
   mutations: { ...baseMutations },
   subscriptions: { },
   _relationships: [],
-  // addRelationships: () => {
-  //   console.log(this._relationships);
-  //   if (this._relationships.length) {
-  //     this._relationships.map(rel => rel());
-  //   }
-  // },
 };

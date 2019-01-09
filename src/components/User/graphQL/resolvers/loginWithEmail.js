@@ -1,5 +1,5 @@
-const passport = require('passport');
 const { UserInputError } = require('apollo-server');
+const { authenticate } = require('../../lib/passport/LocalStrategy');
 
 module.exports = {
   kind: 'mutation',
@@ -22,35 +22,32 @@ module.exports = {
       email,
       password,
     };
-    return new Promise(((resolve, reject) => {
-      passport.authenticate('local', { session: false }, (err, user, info) => {
-        if (err) reject(err);
+    try {
+      const { user, info } = await authenticate(req, res);
+      if (user) {
+        return ({
+          name: user.name,
+          token: user.signToken(),
+        });
+      }
 
-        if (user) {
-          resolve({
-            name: user.name,
-            token: user.signToken(),
-          });
+      if (info) {
+        switch (info.code) {
+          case 'NOTFOUND':
+            return (new UserInputError('invalid credentials'));
+
+          case 'WRONGPASSWORD':
+            return (new UserInputError('invalid credentials'));
+
+          default:
+            return (new UserInputError('something went wrong'));
         }
+      }
 
-        if (info) {
-          switch (info.code) {
-            case 'NOTFOUND':
-              reject(new UserInputError('invalid credentials'));
-              break;
-
-            case 'WRONGPASSWORD':
-              reject(new UserInputError('invalid credentials'));
-              break;
-
-            default:
-              reject(new UserInputError('something went wrong'));
-              break;
-          }
-        }
-
-        reject(new UserInputError('server error'));
-      })(req, res);
-    }));
+      return (new Error('server error'));
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
   },
 };

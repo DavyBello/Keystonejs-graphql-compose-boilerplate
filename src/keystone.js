@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
 require('dotenv').config();
@@ -36,7 +37,6 @@ require('./app/components');
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
 // for each request) should be added to ./routes/middleware.js
-/* eslint-disable global-require */
 keystone.set('locals', {
   _: require('lodash'),
   env: keystone.get('env'),
@@ -45,7 +45,7 @@ keystone.set('locals', {
 });
 
 // Load your project's Routes
-// keystone.set('routes', require('./routes'));
+keystone.set('routes', require('./routes'));
 
 
 // Configure the navigation bar in Keystone's Admin UI

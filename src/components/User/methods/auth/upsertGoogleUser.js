@@ -1,26 +1,26 @@
-module.exports = function upsertGoogleUser(accessToken, refreshToken, profile, cb) {
+/* eslint-disable no-unused-vars */
+// eslint-disable-next-line func-names
+module.exports = async function ({ accessToken, refreshToken, profile }) {
   const User = this;
-  return this.findOne({
-    '_gP.id': profile.id,
-  }, (err, user) => {
+
+  try {
+    const user = await User.findOne({ 'socail._gP.id': profile.id });
+
     // no user was found, lets create a new one
     if (!user) {
-      const newUser = new User({
-        name: profile.displayName,
+      const newUser = await User.create({
+        name: profile.displayName || `${profile.familyName} ${profile.givenName}`,
         email: profile.emails[0].value,
-        _gP: {
+        'social._gP': {
           id: profile.id,
           token: accessToken,
         },
       });
 
-      return (newUser.save((error, savedUser) => {
-        if (error) {
-          console.log(error);
-        }
-        return cb(error, savedUser);
-      }));
+      return newUser;
     }
-    return cb(err, user);
-  });
+    return user;
+  } catch (error) {
+    return error;
+  }
 };
