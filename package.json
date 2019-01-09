@@ -23,9 +23,11 @@
     "apollo-server": "^2.2.2",
     "apollo-server-express": "^2.2.2",
     "async": "2.1.4",
+    "caller": "^1.0.1",
     "cors": "^2.8.5",
     "cryptr": "^4.0.1",
     "dotenv": "4.0.0",
+    "express-handlebars": "^3.0.0",
     "express-jwt": "^5.3.1",
     "graphql": "^14.0.2",
     "graphql-compose": "^5.3.4",
@@ -42,7 +44,7 @@
     "passport-google-token": "^0.1.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
-    "pug": "2.0.0-beta11"
+    "require-all": "^3.0.0"
   },
   "devDependencies": {
     "chai": "^4.1.2",

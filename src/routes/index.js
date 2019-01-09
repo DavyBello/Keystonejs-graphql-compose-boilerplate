@@ -4,8 +4,6 @@ const apolloServer = require('../apolloServer');
 
 const emailRoutes = require('./emails');
 
-require('./passport');
-
 const apiPath = '/graphql';
 
 // Setup Route Bindings

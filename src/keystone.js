@@ -1,9 +1,11 @@
+/* eslint-disable global-require */
 // Simulate config options from your production environment by
 // customising the .env file in your project's root folder.
 require('dotenv').config();
 
 // Require keystone
 const keystone = require('keystone');
+const handlebars = require('express-handlebars');
 const Cryptr = require('cryptr');
 
 const { checkEnv } = require('./utils/initApp');
@@ -20,7 +22,12 @@ keystone.init({
   static: 'public',
   favicon: 'public/favicon.ico',
   // views: 'templates/views',
-  'view engine': 'pug',
+  'view engine': '.hbs',
+
+  'custom engine': handlebars.create({
+    helpers: require('../templates/helpers')(),
+    extname: '.hbs',
+  }).engine,
 
   emails: 'templates/emails',
 
@@ -30,16 +37,12 @@ keystone.init({
   'user model': 'keystoneAdmin',
 });
 
-// Load your project's Models
-keystone.import('models');
-
 // Load your project's Components
 require('./app/components');
 
 // Setup common locals for your templates. The following are required for the
 // bundled templates and layouts. Any runtime locals (that should be set uniquely
 // for each request) should be added to ./routes/middleware.js
-/* eslint-disable global-require */
 keystone.set('locals', {
   _: require('lodash'),
   env: keystone.get('env'),
@@ -53,8 +56,8 @@ keystone.set('routes', require('./routes'));
 
 // Configure the navigation bar in Keystone's Admin UI
 keystone.set('nav', {
-  posts: ['Post', 'PostCategory'],
-  users: 'User',
+  // posts: ['Post', 'PostCategory'],
+  // users: 'User',
   admins: 'keystoneAdmin',
 });
 
@@ -81,14 +84,14 @@ mailgunUtils.checkMailgun();
 
 keystone.pvCryptr = new Cryptr(process.env.PASSWORD_VERSION_SECRET);
 
-const apolloServer = require('./apolloServer');
+// const apolloServer = require('./apolloServer');
 
 // Start Keystone to connect to your database and initialise the web server
 keystone.start({
-  onStart: () => {
-    const server = keystone.httpsServer
-      ? keystone.httpsServer : keystone.httpServer;
+  // onStart: () => {
+  //   const server = keystone.httpsServer
+  //     ? keystone.httpsServer : keystone.httpServer;
 
-    apolloServer.installSubscriptionHandlers(server);
-  },
+  //   apolloServer.installSubscriptionHandlers(server);
+  // },
 });

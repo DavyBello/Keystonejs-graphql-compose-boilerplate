@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const chai = require('chai');
 
-const { decodeToken } = require('../../../../modelMethods/user');
+const { decodeToken } = require('../../../../components/User/methods');
 const {
   connectMongoose, clearDbAndRestartCounters, disconnectMongoose, createRows, getContext
 } = require('../../../helper');

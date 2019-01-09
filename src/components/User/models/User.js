@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 const { Field: { Types }, List } = require('keystone');
 
-const ModelMethods = require('../modelMethods/user/index.js');
+const ModelMethods = require('../methods/index.js');
 
 /**
  * User Model
@@ -24,15 +24,18 @@ User.add({
   isActivated: { type: Boolean, default: false, noedit: true },
   // user email verification status
   isVerified: { type: Boolean, default: false, noedit: true },
-  // googleProvider
-  _gP: {
-    id: { type: String, noedit: true },
-    token: { type: String, noedit: true },
-  },
-  // facebookProvider
-  _fbP: {
-    id: { type: String, noedit: true },
-    token: { type: String, noedit: true },
+}, 'Social Auth', {
+  social: {
+    // googleProvider
+    _gP: {
+      id: { type: String, noedit: true },
+      token: { type: String, noedit: true },
+    },
+    // facebookProvider
+    _fbP: {
+      id: { type: String, noedit: true },
+      token: { type: String, noedit: true },
+    },
   },
 });
 

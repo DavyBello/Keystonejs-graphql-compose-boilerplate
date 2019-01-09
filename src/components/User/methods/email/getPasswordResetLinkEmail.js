@@ -1,7 +1,7 @@
 const keystone = require('keystone');
 
-const prepareEmail = require('../../../lib/prepareEmail');
-const createPasswordResetCode = require('../../../lib/createPasswordResetCode');
+const prepareEmail = require('../../../../lib/prepareEmail');
+const createPasswordResetCode = require('../../lib/createPasswordResetCode');
 
 module.exports = function getPasswordResetLinkEmail() {
   const user = this;

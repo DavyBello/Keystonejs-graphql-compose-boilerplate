@@ -1,5 +1,8 @@
-const passport = require('passport');
+const keystone = require('keystone');
 const { UserInputError } = require('apollo-server');
+const { authenticate } = require('../../lib/passport/GoogleTokenStrategy');
+
+const User = keystone.list('User').model;
 
 module.exports = {
   kind: 'mutation',
@@ -15,40 +18,35 @@ module.exports = {
     name: String!
   }`,
   resolve: async ({ args, context: { req, res } }) => {
-    const { input: { accessToken } } = args;
+    const { input: { accessToken: token } } = args;
     req.body = {
       ...req.body,
-      access_token: accessToken,
+      access_token: token,
     };
-    return new Promise(((resolve, reject) => {
-      passport.authenticate('google-token', { session: false }, (err, user, info) => {
-        if (err) {
-          reject(err);
-        }
 
-        if (user) {
-          resolve({
-            name: user.name,
-            token: user.signToken(),
-          });
-        }
-        if (info) {
-          switch (info.code) {
-            case 'NOTFOUND':
-              reject(new UserInputError('invalid credentials'));
-              break;
+    try {
+      const { data, info } = await authenticate(req, res);
+      const { accessToken, refreshToken, profile } = data;
 
-            case 'WRONGPASSWORD':
-              reject(new UserInputError('invalid credentials'));
-              break;
+      const user = await User.upsertGoogleUser({ accessToken, refreshToken, profile });
 
-            default:
-              reject(new UserInputError('something went wrong'));
-              break;
-          }
+      if (user) {
+        return ({
+          name: user.name,
+          token: user.signToken(),
+        });
+      }
+      if (info) {
+        switch (info.code) {
+          case 'ETIMEDOUT':
+            return (new UserInputError('Failed to reach Google: Try Again'));
+          default:
+            return (new UserInputError('something went wrong'));
         }
-        reject(Error('server error'));
-      })(req, res);
-    }));
+      }
+      return (Error('server error'));
+    } catch (error) {
+      return error;
+    }
   },
 };

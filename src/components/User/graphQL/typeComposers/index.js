@@ -2,7 +2,7 @@ const keystone = require('keystone');
 const { composeWithMongoose } = require('graphql-compose-mongoose');
 const { schemaComposer } = require('graphql-compose');
 
-const noviewUserFields = ['password', '_pv'];
+const noviewUserFields = ['password', '_pv', 'social'];
 
 /**
 * Mongoose Models
