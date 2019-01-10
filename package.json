@@ -41,7 +41,6 @@
     "lodash": "^4.13.1",
     "moment": "^2.22.2",
     "passport": "^0.4.0",
-    "passport-facebook": "^2.1.1",
     "passport-google-token": "^0.1.2",
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
