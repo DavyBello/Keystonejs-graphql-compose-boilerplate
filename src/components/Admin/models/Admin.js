@@ -2,14 +2,14 @@
 const { List, Field: { Types } } = require('keystone');
 
 /**
- * keystoneAdmin Model
+ * Admin Model
  * ==========
  */
-const keystoneAdmin = new List('keystoneAdmin', {
+const Admin = new List('Admin', {
   track: true,
 });
 
-keystoneAdmin.add({
+Admin.add({
   name: { type: Types.Text, index: true },
   email: {
     type: Types.Email, initial: true, required: true, unique: true, index: true,
@@ -21,12 +21,12 @@ keystoneAdmin.add({
 });
 
 // Provide access to Keystone
-keystoneAdmin.schema.virtual('canAccessKeystone').get(function () {
+Admin.schema.virtual('canAccessKeystone').get(function () {
   return this.isAdmin;
 });
 
 /**
  * Registration
  */
-keystoneAdmin.defaultColumns = 'name, email, canAccessKeystone, isAdmin';
-keystoneAdmin.register();
+Admin.defaultColumns = 'name, email, canAccessKeystone, isAdmin';
+Admin.register();

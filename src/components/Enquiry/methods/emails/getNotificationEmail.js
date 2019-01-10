@@ -7,8 +7,8 @@ module.exports = async function () {
   const enquiry = this;
   const brand = keystone.get('brand');
 
-  const keystoneAdmin = keystone.list('keystoneAdmin').model;
-  const admins = await keystoneAdmin.find({ recieveGuestEnquiries: true });
+  const Admin = keystone.list('Admin').model;
+  const admins = await Admin.find({ recieveGuestEnquiries: true });
 
   return prepareEmail({
     options: {

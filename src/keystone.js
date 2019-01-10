@@ -34,7 +34,7 @@ keystone.init({
   'auto update': true,
   session: true,
   auth: true,
-  'user model': 'keystoneAdmin',
+  'user model': 'Admin',
 });
 
 // Load your project's Components
@@ -58,7 +58,7 @@ keystone.set('routes', require('./routes'));
 keystone.set('nav', {
   // posts: ['Post', 'PostCategory'],
   // users: 'User',
-  admins: 'keystoneAdmin',
+  admins: 'Admin',
 });
 
 // Configure cloudinary
